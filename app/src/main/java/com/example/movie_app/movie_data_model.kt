@@ -1,6 +1,6 @@
 package com.example.movie_app
 
-data class movie_data_model(
+data class movie_model(
     val page: Int,
     val results: List<Result>,
     val total_pages: Int,
