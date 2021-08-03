@@ -13,6 +13,7 @@ class movie_activity : AppCompatActivity() {
 
 
 
+
     }
 
 }
