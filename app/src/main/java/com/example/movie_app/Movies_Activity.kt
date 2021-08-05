@@ -1,7 +1,7 @@
 package com.example.movie_app
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +13,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Movies_Activity: AppCompatActivity() {
-
+class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
     var BASE_URL = "https://movie-app10.herokuapp.com/"
     lateinit var gridLayoutManager: GridLayoutManager
-    var isLoaded = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +26,8 @@ class Movies_Activity: AppCompatActivity() {
         movies_recycler.layoutManager = gridLayoutManager
 
         getMovies()
-
-//        getMoviesFromDemo()
     }
 
-//    private fun getMoviesFromDemo() {
-//        val movieAdapter = MovieAdapter(this, demoData)
-//        movieAdapter.notifyDataSetChanged()
-//        movies_recycler.adapter = movieAdapter
-//    }
 
     private fun getMovies() {
 
@@ -49,13 +40,16 @@ class Movies_Activity: AppCompatActivity() {
         val retrofitData = retrofitBuilder.getMovies()
         retrofitData.enqueue(object : Callback<List<movie_model>> {
             override fun onResponse(call: Call<List<movie_model>>, response: Response<List<movie_model>>) {
+                Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_LONG).show()
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_SHORT).show()
                 val responseBody = response.body() !!
 
-                val movieAdapter = MovieAdapter(baseContext, responseBody)
+                val movieAdapter = MovieAdapter(baseContext, responseBody, this@Movies_Activity)
+
                 movieAdapter.notifyDataSetChanged()
                 movies_recycler.adapter = movieAdapter
+
             }
 
             override fun onFailure(call: Call<List<movie_model>>, t: Throwable) {
@@ -63,4 +57,13 @@ class Movies_Activity: AppCompatActivity() {
             }
         })
     }
+
+    override fun onClick(position: Int) {
+        val intent = Intent(this, Movie_Details_Activity::class.java)
+        intent.putExtra("position", position.toString())
+        startActivity(intent)
+    }
+
+
 }
+

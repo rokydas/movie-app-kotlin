@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Movie_app">
 
         <activity android:name=".Movies_Activity" />
+        <activity android:name=".Movie_Details_Activity" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

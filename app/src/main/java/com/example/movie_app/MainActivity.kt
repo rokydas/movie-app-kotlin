@@ -14,6 +14,5 @@ class MainActivity : AppCompatActivity() {
             val intentMovies = Intent(this, Movies_Activity::class.java)
             startActivity(intentMovies)
         }
-
     }
 }
