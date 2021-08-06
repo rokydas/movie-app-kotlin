@@ -1,9 +1,11 @@
 package com.example.movie_app
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.movies_activity.*
@@ -43,7 +45,6 @@ class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
         val retrofitData = retrofitBuilder.getMovies()
         retrofitData.enqueue(object : Callback<List<movie_model>> {
             override fun onResponse(call: Call<List<movie_model>>, response: Response<List<movie_model>>) {
-                Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_LONG).show()
                 spin_kit.setVisibility(View.GONE);
                 movies_recycler.setVisibility(View.VISIBLE);
                 Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_SHORT).show()
@@ -59,6 +60,12 @@ class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
 
             override fun onFailure(call: Call<List<movie_model>>, t: Throwable) {
                 Toast.makeText(this@Movies_Activity, t.message, Toast.LENGTH_LONG).show()
+                val builder = AlertDialog.Builder(this@Movies_Activity)
+
+                builder.setTitle("Network issue")
+                builder.setMessage("Your network is turned off. Please turn on to load movies...")
+                builder.setPositiveButton("OK", { dialogInterface: DialogInterface, i: Int -> finish() })
+                builder.show()
             }
         })
     }

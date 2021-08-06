@@ -6,10 +6,8 @@ import android.os.Bundle
 import coil.load
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.movie_details_activity.*
-import android.graphics.Typeface
 import android.net.Uri
 import android.view.View
-
 
 class Movie_Details_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,5 +38,6 @@ class Movie_Details_Activity : AppCompatActivity() {
     fun changeVisibilityOfStar(previous: View, new: View) {
         new.visibility = View.VISIBLE
         previous.visibility = View.GONE
+
     }
 }
