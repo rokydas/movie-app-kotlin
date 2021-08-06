@@ -7,6 +7,7 @@ import coil.load
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.movie_details_activity.*
 import android.graphics.Typeface
+import android.net.Uri
 import android.view.View
 
 
@@ -19,6 +20,7 @@ class Movie_Details_Activity : AppCompatActivity() {
 
         val movie = intent.getParcelableExtra<movie_model>("movie")
         val imgURl = "https://image.tmdb.org/t/p/original/" + movie?.poster_path
+        val videURL = "https://youtube.com/watch?v=" + movie?.videoKey
 
         text.text = movie?.title
         description.text = movie?.overview
@@ -28,6 +30,11 @@ class Movie_Details_Activity : AppCompatActivity() {
 
         star.setOnClickListener() { changeVisibilityOfStar(star, fillStar) }
         fillStar.setOnClickListener() { changeVisibilityOfStar(fillStar, star) }
+
+        trailer.setOnClickListener() {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videURL))
+            startActivity(intent)
+        }
     }
 
     fun changeVisibilityOfStar(previous: View, new: View) {
