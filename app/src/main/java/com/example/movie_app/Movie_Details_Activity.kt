@@ -11,9 +11,10 @@ class Movie_Details_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_details_activity)
 
-        val movie = intent.getParcelableExtra<movie_model>("movie")
+        val bundle: Bundle?= intent.extras
+        val position = bundle?.getString("position")
 
-        text.text = movie?.title
+        text.text = position
 
     }
 }
