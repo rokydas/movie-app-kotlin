@@ -33,8 +33,6 @@ class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
 
         movies_recycler.setVisibility(View.GONE);
 
-//        https://www.youtube.com/watch?v=2WUhVb5jj8I
-
         movies_recycler.setHasFixedSize(true)
         gridLayoutManager = GridLayoutManager(this, 2)
         movies_recycler.layoutManager = gridLayoutManager
@@ -55,7 +53,7 @@ class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
         retrofitData.enqueue(object : Callback<List<movie_model>> {
             override fun onResponse(call: Call<List<movie_model>>, response: Response<List<movie_model>>) {
                 Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_LONG).show()
-                progressBar.setVisibility(View.GONE);
+                spin_kit.setVisibility(View.GONE);
                 movies_recycler.setVisibility(View.VISIBLE);
                 Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_SHORT).show()
                 val responseBody = response.body() !!
