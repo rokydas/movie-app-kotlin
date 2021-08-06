@@ -16,7 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
     var BASE_URL = "https://movie-app10.herokuapp.com/"
     lateinit var gridLayoutManager: GridLayoutManager
-    var moviesData = listOf<movie_model>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +45,9 @@ class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
                 Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_LONG).show()
                 spin_kit.setVisibility(View.GONE);
                 movies_recycler.setVisibility(View.VISIBLE);
+
                 Toast.makeText(this@Movies_Activity, "success", Toast.LENGTH_SHORT).show()
                 val responseBody = response.body() !!
-                moviesData = responseBody
 
                 val movieAdapter = MovieAdapter(baseContext, responseBody, this@Movies_Activity)
 
@@ -65,7 +64,7 @@ class Movies_Activity: AppCompatActivity(), MovieAdapter.myOnClickListener {
 
     override fun onClick(position: Int) {
         val intent = Intent(this, Movie_Details_Activity::class.java)
-        intent.putExtra("movie", moviesData[position])
+        intent.putExtra("position", position.toString())
         startActivity(intent)
     }
 

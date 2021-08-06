@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movie_details_activity.xml" value="0.33" />
         <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movies_activity.xml" value="0.21331521739130435" />
+=======
+        <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movie_details_activity.xml" value="0.192481884057971" />
+>>>>>>> b32b57c9b5bf7c45f9d296034aba8d87b1de3b15
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
