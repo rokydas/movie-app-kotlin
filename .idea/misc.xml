@@ -4,11 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movie_details_activity.xml" value="0.33" />
         <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movies_activity.xml" value="0.21331521739130435" />
 =======
         <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movie_details_activity.xml" value="0.192481884057971" />
 >>>>>>> b32b57c9b5bf7c45f9d296034aba8d87b1de3b15
+=======
+        <entry key="..\:/kotlin/movie_app/app/src/main/res/drawable/loading_progress.xml" value="0.3828125" />
+        <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/activity_main.xml" value="0.2515625" />
+        <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movie_details_activity.xml" value="0.36666666666666664" />
+        <entry key="..\:/kotlin/movie_app/app/src/main/res/layout/movies_activity.xml" value="0.36666666666666664" />
+>>>>>>> parent of 44c61f1... build problem solved and upadated the ui of movie detail
       </map>
     </option>
   </component>

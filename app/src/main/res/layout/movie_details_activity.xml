@@ -3,102 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/screen_bg"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/text"
-        android:text="The Godfather"
+        android:text="Hello world"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+<<<<<<< HEAD
         android:textSize="25sp"
+=======
+        android:textSize="35dp"
+>>>>>>> parent of 44c61f1... build problem solved and upadated the ui of movie detail
         android:layout_gravity="center_horizontal"
         android:textAlignment="center" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_marginRight="20dp"
-            android:contentDescription="This is the poster of the movie"
-            android:src="@drawable/godfather"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:fontFamily="@font/font_awesome"
-                android:text="\uf005"
-                android:textSize="40sp"
-                android:layout_marginBottom="15dp"/>
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="User Rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
-                    android:textColor="@color/primary"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:text="8.6/10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="Release Date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
-                    android:textColor="@color/primary"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:text="1972-03-14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 
         

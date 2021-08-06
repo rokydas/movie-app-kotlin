@@ -6,14 +6,21 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+<<<<<<< HEAD
     <com.github.ybq.android.spinkit.SpinKitView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/spin_kit"
         style="@style/SpinKitView.Large.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+=======
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+>>>>>>> parent of 44c61f1... build problem solved and upadated the ui of movie detail
         android:layout_gravity="center"
-        app:SpinKit_Color="@color/primary" />
+        android:id="@+id/progressBar"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView
