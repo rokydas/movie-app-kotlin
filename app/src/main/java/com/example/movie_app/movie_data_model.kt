@@ -1,5 +1,4 @@
 package com.example.movie_app
-
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
