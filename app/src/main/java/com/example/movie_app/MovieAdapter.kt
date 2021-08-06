@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import kotlinx.android.synthetic.main.movie_activity.view.*
 
-class MovieAdapter(val context: Context, val movieList: List<movie_model>, val listener:myOnClickListener)
+class MovieAdapter(val context: Context, val movieList: List<Result>, val listener:myOnClickListener)
     : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
