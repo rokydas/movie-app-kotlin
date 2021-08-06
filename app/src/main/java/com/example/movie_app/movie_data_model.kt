@@ -1,9 +1,7 @@
 package com.example.movie_app
-
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
-
 
 //data class movie_model(
 //    val title: String,
@@ -13,6 +11,7 @@ import java.io.Serializable
 //    val total_results: Int
 //)
 
+@Parcelize
 data class movie_model (
     val id: Int,
     val popularity: Double,
@@ -22,4 +21,4 @@ data class movie_model (
     val release_date: String,
     val imdb_id: String,
     val videoKey: String,
-)
+): Parcelable
