@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:background="@color/screen_bg"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_height="match_parent">
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/spin_kit"
-        style="@style/SpinKitView.Large.FadingCircle"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:outlineAmbientShadowColor="@color/primary"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:SpinKit_Color="@color/primary" />
+        android:layout_centerHorizontal="true" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movies_recycler"
