@@ -1,8 +1,12 @@
 package com.example.movie_app.activity
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -23,10 +27,27 @@ class MoviesActivity: AppCompatActivity(), MovieAdapter.myOnClickListener {
     var BASE_URL = "https://api.themoviedb.org/3/"
     lateinit var gridLayoutManager: GridLayoutManager
     var moviesData = listOf<movies>()
+    var category = "top_rated"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movies_activity)
+
+        var options = arrayOf<String>("Top rated movies", "Most popular movies", "Your favourite movies")
+        spinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , options)
+
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(p2 == 0) category = "top_rated"
+                else if(p2 == 1) category = "popular"
+                getMovies()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                Toast.makeText(this@MoviesActivity, "nothing is selected", Toast.LENGTH_LONG).show()
+            }
+        }
 
         movies_recycler.setVisibility(View.GONE);
 
@@ -46,13 +67,11 @@ class MoviesActivity: AppCompatActivity(), MovieAdapter.myOnClickListener {
             .build()
             .create(TopRatedInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getMovies()
+        val retrofitData = retrofitBuilder.getMovies(category)
         retrofitData.enqueue(object : Callback<results> {
             override fun onResponse(call: Call<results>, response: Response<results>) {
                 spin_kit.setVisibility(View.GONE);
                 movies_recycler.setVisibility(View.VISIBLE);
-
-                Toast.makeText(this@MoviesActivity, "success", Toast.LENGTH_LONG).show()
 
                 val responseBody = response.body() !!
                 moviesData = responseBody.results

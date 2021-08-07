@@ -9,24 +9,9 @@ import retrofit2.http.Path
 
 
 interface TopRatedInterface {
-    @GET("movie/top_rated?api_key=f96ac62d92ada173838748fa0f087eef")
-    fun getMovies() : Call<results>
+    @GET("movie/{category}?api_key=f96ac62d92ada173838748fa0f087eef")
+    fun getMovies(@Path(value = "category", encoded = true) id:  String) : Call<results>
 }
-
-//interface MovieDetailsInterface {
-//    @GET("movie/{id}?api_key=f96ac62d92ada173838748fa0f087eef")
-//    fun getDetails() : Call<movieDetails>
-//}
-
-//interface MovieDetailsInterface {
-//    @GET("movie/{id}?api_key=f96ac62d92ada173838748fa0f087eef")
-//    fun getDetails(@Path  id: String?): Call<movieDetails>
-//}
-
-//interface MovieDetailsInterface {
-//    @GET("movie/{id}?api_key=f96ac62d92ada173838748fa0f087eef")
-//    fun getDetails(@Path(value = "id", encoded = true) fullUrl: String?): Call<movieDetails?>?
-//}
 
 interface MovieDetailsInterface {
     @GET("movie/{id}?api_key=f96ac62d92ada173838748fa0f087eef")
