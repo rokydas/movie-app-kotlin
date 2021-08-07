@@ -1,22 +1,21 @@
-package com.example.movie_app
+package com.example.movie_app.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import coil.load
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.movie_details_activity.*
-import android.net.Uri
 import android.view.View
+import android.widget.Toast
+import com.example.movie_app.R
 
-class Movie_Details_Activity : AppCompatActivity() {
+class MovieDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_details_activity)
 
 //        fillStar.visibility = View.GONE
-//
-//        val movie = intent.getParcelableExtra<movie_model>("movie")
+
+        val bundle: Bundle? = intent.extras
+        val id = bundle?.getString("id")
+        Toast.makeText(this, "$id", Toast.LENGTH_LONG).show()
 //        val imgURl = "https://image.tmdb.org/t/p/original/" + movie?.poster_path
 //        val videURL = "https://youtube.com/watch?v=" + movie?.videoKey
 //

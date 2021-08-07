@@ -1,4 +1,4 @@
-package layout
+package com.example.movie_app.activity
 
 import android.os.Bundle
 import android.os.PersistableBundle

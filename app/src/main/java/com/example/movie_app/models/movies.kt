@@ -1,6 +1,6 @@
-package com.example.movie_app
+package com.example.movie_app.models
 
-data class Result(
+data class movies(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,

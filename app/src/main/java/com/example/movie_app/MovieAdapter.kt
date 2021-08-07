@@ -1,18 +1,15 @@
 package com.example.movie_app
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.movie_app.models.movies
 import kotlinx.android.synthetic.main.movie_activity.view.*
 
-class MovieAdapter(val context: Context, val movieList: List<Result>, val listener:myOnClickListener)
+class MovieAdapter(val context: Context, val movieList: List<movies>, val listener:myOnClickListener)
     : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
