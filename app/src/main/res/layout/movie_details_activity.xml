@@ -1,204 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/screenLayout"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/screen_bg"
-    android:layout_height="match_parent">
+    android:background="@color/screen_bg">
 
-    <TextView
-        android:id="@+id/text"
-        android:text="The Godfather"
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="30dp"
-        android:layout_marginHorizontal="10dp"
-        android:textSize="30dp"
-        android:layout_gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textColor="@color/primary"
-        android:textStyle="bold" />
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/primary" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/movie_poster"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_marginRight="20dp"
-            android:contentDescription="This is the poster of the movie"
-            android:src="@drawable/godfather"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/detailsContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/star"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:fontFamily="@font/font_awesome"
-                android:text="\uf005"
-                android:textSize="45sp"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:id="@+id/fillStar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:fontFamily="@font/font_awesome_solid"
-                android:text="\uf005"
-                android:textSize="45sp"
-                android:layout_marginBottom="15dp"/>
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="30dp"
+                android:text="The Godfather"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:text="Popularity"
+                <ImageView
+                    android:id="@+id/movie_poster"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_marginRight="20dp"
+                    android:contentDescription="This is the poster of the movie"
+                    android:src="@drawable/godfather" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
-                    android:textColor="@color/primary"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/popularity"
-                    android:text="9.105"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/star"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="15dp"
+                        android:fontFamily="@font/font_awesome"
+                        android:text="\uf005"
+                        android:textSize="45sp" />
+
+                    <!--                <TextView-->
+                    <!--                    android:id="@+id/fillStar"-->
+                    <!--                    android:layout_width="50dp"-->
+                    <!--                    android:layout_height="50dp"-->
+                    <!--                    android:fontFamily="@font/font_awesome_solid"-->
+                    <!--                    android:text="\uf005"-->
+                    <!--                    android:textSize="45sp"-->
+                    <!--                    android:layout_marginBottom="15dp"/>-->
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Popularity"
+                            android:textColor="@color/primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/popularity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="9.105"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Release Date"
+                            android:textColor="@color/primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/release_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="1972-03-14"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:background="@color/white"
-                android:padding="10dp"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
-                    android:text="Release Date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:text="SYNOPSIS: "
                     android:textColor="@color/primary"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/release_date"
-                    android:text="1972-03-14"
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Based on actual events that took place at Gwangju Inhwa School for the hearing-impaired, where young deaf students were the victims of repeated sexual assaults by faculty members over a period of five years in the early 2000s." />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:text="TRAILER: "
+                    android:textColor="@color/primary"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/trailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:fontFamily="@font/font_awesome_brand"
+                            android:text="\uf167"
+                            android:textColor="@color/primary"
+                            android:textSize="45sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="Click here to watch\nthe trailer of this movie." />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:background="@color/white"
-        android:padding="10dp"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            android:textSize="18sp"
-            android:layout_gravity="left"
-            android:text="SYNOPSIS: "/>
-
-        <TextView
-            android:id="@+id/description"
-            android:text="Based on actual events that took place at Gwangju Inhwa School for the hearing-impaired, where young deaf students were the victims of repeated sexual assaults by faculty members over a period of five years in the early 2000s."
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:background="@color/white"
-        android:padding="10dp"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            android:textSize="18sp"
-            android:layout_gravity="left"
-            android:text="TRAILER: "/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/trailer"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:textColor="@color/primary"
-                    android:fontFamily="@font/font_awesome_brand"
-                    android:text="\uf167"
-                    android:textSize="45sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="10dp"
-                    android:text="Click here to watch\nthe trailer of this movie."/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>
