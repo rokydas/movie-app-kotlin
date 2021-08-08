@@ -20,8 +20,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import android.app.Activity
 
 import android.content.Intent
-
-
+import android.net.Uri
+import com.example.movie_app.VideoInterface
+import com.example.movie_app.models.videos
 
 
 class MovieDetailsActivity : AppCompatActivity() {
@@ -42,6 +43,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         val idWithStr: String = "id: " + id
 
         getDetailsOfMovie(idWithStr)
+        getVideoOfMovie(idWithStr)
 
         star.setOnClickListener() {
             val status = movieDbHandler.addFavoriteMovie(movies(responseBody.id , responseBody.title, responseBody.poster_path))
@@ -58,11 +60,39 @@ class MovieDetailsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Removed this movie from your favorite", Toast.LENGTH_LONG).show()
             }
         }
+    }
 
-//        trailer.setOnClickListener() {
-//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videURL))
-//            startActivity(intent)
-//        }
+    private fun getVideoOfMovie(idWithStr: String) {
+        val id = idWithStr.substring(4, idWithStr.length)
+
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .build()
+            .create(VideoInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getVideos(id)
+
+        retrofitData.enqueue(object : Callback<videos> {
+            override fun onResponse(call: Call<videos>, response: Response<videos>) {
+                val videoList = response.body()?.results
+                val video1 = "https://youtube.com/watch?v=" + videoList!![0].key
+                trailer1.setOnClickListener() {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(video1))
+                    startActivity(intent)
+                }
+            }
+
+            override fun onFailure(call: Call<videos>, t: Throwable) {
+                Toast.makeText(this@MovieDetailsActivity, "failed", Toast.LENGTH_LONG).show()
+                Log.d("myError", t.message.toString())
+            }
+
+        })
+    }
+
+    private fun showVideoError() {
+        Toast.makeText(this@MovieDetailsActivity, "Video not found", Toast.LENGTH_LONG).show()
     }
 
     private fun getDetailsOfMovie(idWithStr: String) {

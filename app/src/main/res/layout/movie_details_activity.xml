@@ -182,7 +182,7 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:id="@+id/trailer"
+                    android:id="@+id/trailer1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
