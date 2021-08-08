@@ -7,9 +7,12 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import coil.load
+import com.example.movie_app.MovieDbHandler
 import com.example.movie_app.MovieDetailsInterface
 import com.example.movie_app.R
+import com.example.movie_app.models.favoriteMovie
 import com.example.movie_app.models.movieDetails
+import com.example.movie_app.models.movies
 import kotlinx.android.synthetic.main.movie_details_activity.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,28 +23,38 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MovieDetailsActivity : AppCompatActivity() {
 
     var BASE_URL = "https://api.themoviedb.org/3/"
+    var responseBody = movieDetails(0, "", 0.0, "", "", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_details_activity)
 
-        detailsContent.visibility = View.GONE
+        val movieDbHandler: MovieDbHandler = MovieDbHandler(this)
 
-//        fillStar.visibility = View.GONE
+        detailsContent.visibility = View.GONE
+        fillStar.visibility = View.GONE
 
         val bundle: Bundle? = intent.extras
         val id = bundle?.getString("id")
 
-        var idWithStr: String = "id: " + id
+        val idWithStr: String = "id: " + id
 
         getDetailsOfMovie(idWithStr)
 
-//        val imgURl = "https://image.tmdb.org/t/p/original/" + movie?.poster_path
-//        val videURL = "https://youtube.com/watch?v=" + movie?.videoKey
-//
-//        star.setOnClickListener() { changeVisibilityOfStar(star, fillStar) }
-//        fillStar.setOnClickListener() { changeVisibilityOfStar(fillStar, star) }
-//
+        star.setOnClickListener() {
+            val status = movieDbHandler.addFavoriteMovie(favoriteMovie(responseBody.id , responseBody.title, responseBody.poster_path))
+            if(status > -1) {
+                changeVisibilityOfStar(star, fillStar)
+            }
+        }
+
+        fillStar.setOnClickListener() {
+            val status = movieDbHandler.deleteEmployee(responseBody.id)
+            if(status > -1) {
+                changeVisibilityOfStar(fillStar, star)
+            }
+        }
+
 //        trailer.setOnClickListener() {
 //            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videURL))
 //            startActivity(intent)
@@ -62,13 +75,13 @@ class MovieDetailsActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<movieDetails> {
             override fun onResponse(call: Call<movieDetails>, response: Response<movieDetails>) {
 
-                var responseBody = response.body()
+                responseBody = response.body() !!
 
-                text.text = responseBody?.title
-                description.text = responseBody?.overview
-                popularity.text = responseBody?.popularity.toString()
-                release_date.text = responseBody?.release_date
-                movie_poster.load("https://image.tmdb.org/t/p/original/" + responseBody?.poster_path)
+                text.text = responseBody.title
+                description.text = responseBody.overview
+                popularity.text = responseBody.popularity.toString()
+                release_date.text = responseBody.release_date
+                movie_poster.load("https://image.tmdb.org/t/p/original/" + responseBody.poster_path)
 
                 detailsContent.visibility = View.VISIBLE
                 spin_kit.visibility = View.GONE
