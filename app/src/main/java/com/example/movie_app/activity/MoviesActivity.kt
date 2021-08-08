@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movie_app.MovieAdapter
+import com.example.movie_app.MovieDbHandler
 import com.example.movie_app.R
 import com.example.movie_app.TopRatedInterface
 import com.example.movie_app.models.movies
@@ -29,19 +30,30 @@ class MoviesActivity: AppCompatActivity(), MovieAdapter.myOnClickListener {
     var moviesData = listOf<movies>()
     var category = "top_rated"
 
+    override fun onResume() {
+        super.onResume()
+        if(category == "favorite") {
+            getFavoriteMovies()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movies_activity)
 
-        var options = arrayOf<String>("Top rated movies", "Most popular movies", "Your favourite movies")
+        val options = arrayOf<String>("Top rated movies", "Most popular movies", "Your favourite movies")
         spinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , options)
 
         spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
 
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(p2 == 0) category = "top_rated"
-                else if(p2 == 1) category = "popular"
-                getMovies()
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                if(position == 0) category = "top_rated"
+                else if(position == 1) category = "popular"
+                if(position == 0 || position == 1) getMovies()
+                else {
+                    category = "favorite"
+                    getFavoriteMovies()
+                }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -56,6 +68,15 @@ class MoviesActivity: AppCompatActivity(), MovieAdapter.myOnClickListener {
         movies_recycler.layoutManager = gridLayoutManager
 
         getMovies()
+    }
+
+    private fun getFavoriteMovies() {
+        val movieDbHandler: MovieDbHandler = MovieDbHandler(this)
+        val favoriteMovieList = movieDbHandler.viewFavoriteMovies()
+        moviesData = favoriteMovieList
+        val movieAdapter = MovieAdapter(baseContext, favoriteMovieList, this@MoviesActivity)
+        movieAdapter.notifyDataSetChanged()
+        movies_recycler.adapter = movieAdapter
     }
 
 
