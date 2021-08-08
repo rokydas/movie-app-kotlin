@@ -3,14 +3,12 @@ package com.example.movie_app.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import coil.load
 import com.example.movie_app.MovieDbHandler
 import com.example.movie_app.MovieDetailsInterface
 import com.example.movie_app.R
-import com.example.movie_app.models.favoriteMovie
 import com.example.movie_app.models.movieDetails
 import com.example.movie_app.models.movies
 import kotlinx.android.synthetic.main.movie_details_activity.*
@@ -24,15 +22,13 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     var BASE_URL = "https://api.themoviedb.org/3/"
     var responseBody = movieDetails(0, "", 0.0, "", "", "")
+    val movieDbHandler: MovieDbHandler = MovieDbHandler(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_details_activity)
 
-        val movieDbHandler: MovieDbHandler = MovieDbHandler(this)
-
         detailsContent.visibility = View.GONE
-        fillStar.visibility = View.GONE
 
         val bundle: Bundle? = intent.extras
         val id = bundle?.getString("id")
@@ -42,9 +38,10 @@ class MovieDetailsActivity : AppCompatActivity() {
         getDetailsOfMovie(idWithStr)
 
         star.setOnClickListener() {
-            val status = movieDbHandler.addFavoriteMovie(favoriteMovie(responseBody.id , responseBody.title, responseBody.poster_path))
+            val status = movieDbHandler.addFavoriteMovie(movies(responseBody.id , responseBody.title, responseBody.poster_path))
             if(status > -1) {
                 changeVisibilityOfStar(star, fillStar)
+                Toast.makeText(this, "Added this movie to your favorite", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -52,6 +49,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             val status = movieDbHandler.deleteEmployee(responseBody.id)
             if(status > -1) {
                 changeVisibilityOfStar(fillStar, star)
+                Toast.makeText(this, "Removed this movie from your favorite", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -85,6 +83,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
                 detailsContent.visibility = View.VISIBLE
                 spin_kit.visibility = View.GONE
+                getIsFavorite()
 
             }
 
@@ -100,5 +99,21 @@ class MovieDetailsActivity : AppCompatActivity() {
         new.visibility = View.VISIBLE
         previous.visibility = View.GONE
 
+    }
+
+    fun getIsFavorite() {
+        val favoriteMovieList = movieDbHandler.viewFavoriteMovies()
+        var isFavorite:Boolean = false
+
+        for(item in favoriteMovieList) {
+            Log.d("checkingId", item.id.toString() + " " + responseBody.id.toString())
+            if(item.id == responseBody.id) {
+                changeVisibilityOfStar(star, fillStar)
+                isFavorite = true
+                break
+            }
+        }
+
+        if(!isFavorite) { changeVisibilityOfStar(fillStar, star) }
     }
 }

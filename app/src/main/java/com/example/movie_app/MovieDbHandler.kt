@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
-import com.example.movie_app.models.favoriteMovie
+import com.example.movie_app.models.movies
 
 class MovieDbHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
@@ -29,21 +29,21 @@ class MovieDbHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,n
         onCreate(db)
     }
 
-    fun addFavoriteMovie(movie: favoriteMovie):Long{
+    fun addFavoriteMovie(movie: movies):Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
 
         contentValues.put(KEY_ID, movie.id)
         contentValues.put(KEY_TITLE, movie.title)
-        contentValues.put(KEY_TITLE, movie.poster_path)
+        contentValues.put(KEY_POSTER_PATH, movie.poster_path)
 
         val success = db.insert(TABLE_CONTACTS, null, contentValues)
         db.close()
         return success
     }
 
-    fun viewFavoriteMovies():List<favoriteMovie>{
-        val empList:ArrayList<favoriteMovie> = ArrayList<favoriteMovie>()
+    fun viewFavoriteMovies():List<movies>{
+        var favoriteMovieList:List<movies> = listOf<movies>()
         val selectQuery = "SELECT  * FROM $TABLE_CONTACTS"
         val db = this.readableDatabase
         var cursor: Cursor? = null
@@ -51,36 +51,22 @@ class MovieDbHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,n
             cursor = db.rawQuery(selectQuery, null)
         }catch (e: SQLiteException) {
             db.execSQL(selectQuery)
-            return ArrayList()
+            return favoriteMovieList
         }
-        var userId: Int
-        var userName: String
-        var userEmail: String
+        var id: Int
+        var title: String
+        var poster_path: String
         if (cursor.moveToFirst()) {
             do {
-                userId = cursor.getInt(cursor.getColumnIndex("id"))
-                userName = cursor.getString(cursor.getColumnIndex("title"))
-                userEmail = cursor.getString(cursor.getColumnIndex("poster_path"))
-                val emp= favoriteMovie(id = userId, title = userName, poster_path = userEmail)
-                empList.add(emp)
+                id = cursor.getInt(cursor.getColumnIndex("id"))
+                title = cursor.getString(cursor.getColumnIndex("title"))
+                poster_path = cursor.getString(cursor.getColumnIndex("poster_path"))
+                val movie = movies(id = id, title = title, poster_path = poster_path)
+                favoriteMovieList += movie
             } while (cursor.moveToNext())
         }
-        return empList
+        return favoriteMovieList
     }
-
-//    fun updateEmployee(emp: EmpModelClass):Int{
-//        val db = this.writableDatabase
-//        val contentValues = ContentValues()
-//        contentValues.put(KEY_ID, emp.userId)
-//        contentValues.put(KEY_NAME, emp.userName) // EmpModelClass Name
-//        contentValues.put(KEY_EMAIL,emp.userEmail ) // EmpModelClass Email
-//
-//        // Updating Row
-//        val success = db.update(TABLE_CONTACTS, contentValues,"id="+emp.userId,null)
-//        //2nd argument is String containing nullColumnHack
-//        db.close() // Closing database connection
-//        return success
-//    }
 
     fun deleteEmployee(id: Int):Int{
         val db = this.writableDatabase
