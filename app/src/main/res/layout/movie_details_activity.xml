@@ -3,6 +3,7 @@
     android:id="@+id/screenLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:background="@color/screen_bg"
     android:orientation="vertical">
 
@@ -16,12 +17,12 @@
         app:SpinKit_Color="@color/primary" />
 
     <ScrollView
+        android:id="@+id/detailsContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/detailsContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -164,7 +165,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
                 android:background="@color/white"
                 android:gravity="center"
@@ -181,11 +182,19 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-<!--                recyclerview-->
+                <TextView
+                    android:id="@+id/validationTrailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:textSize="17dp"
+                    android:text="There is no trailer available for this movie"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/videos_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:scrollbars="none" />
             </LinearLayout>
 
         </LinearLayout>

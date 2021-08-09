@@ -18,13 +18,16 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.app.Activity
+import android.content.DialogInterface
 
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movie_app.VideoInterface
 import com.example.movie_app.adapter.MovieAdapter
 import com.example.movie_app.adapter.VideoAdapter
+import com.example.movie_app.models.videoInfo
 import com.example.movie_app.models.videos
 import kotlinx.android.synthetic.main.movie_details_activity.spin_kit
 import kotlinx.android.synthetic.main.movies_activity.*
@@ -34,6 +37,7 @@ class MovieDetailsActivity : AppCompatActivity(), VideoAdapter.myOnClickListener
 
     var BASE_URL = "https://api.themoviedb.org/3/"
     var responseBody = movieDetails(0, "", 0.0, "", "", "")
+    var videoList = listOf<videoInfo>()
     val movieDbHandler: MovieDbHandler = MovieDbHandler(this)
     lateinit var gridLayoutManager: GridLayoutManager
 
@@ -42,6 +46,7 @@ class MovieDetailsActivity : AppCompatActivity(), VideoAdapter.myOnClickListener
         setContentView(R.layout.movie_details_activity)
 
         detailsContent.visibility = View.GONE
+        validationTrailer.visibility = View.GONE
 
         videos_recycler.setHasFixedSize(true)
         gridLayoutManager = GridLayoutManager(this, 1)
@@ -87,7 +92,10 @@ class MovieDetailsActivity : AppCompatActivity(), VideoAdapter.myOnClickListener
         retrofitData.enqueue(object : Callback<videos> {
             override fun onResponse(call: Call<videos>, response: Response<videos>) {
                 val responseBody = response.body() !!
-                val videoList = responseBody.results
+                videoList = responseBody.results
+                if(videoList.size == 0) {
+                    validationTrailer.visibility = View.VISIBLE
+                }
                 val videoAdapter = VideoAdapter(baseContext, videoList, this@MovieDetailsActivity)
                 videoAdapter.notifyDataSetChanged()
                 videos_recycler.adapter = videoAdapter
@@ -134,8 +142,12 @@ class MovieDetailsActivity : AppCompatActivity(), VideoAdapter.myOnClickListener
             }
 
             override fun onFailure(call: Call<movieDetails>, t: Throwable) {
-                Toast.makeText(this@MovieDetailsActivity, "failed", Toast.LENGTH_LONG).show()
-                Log.d("myError", t.message.toString())
+                val builder = AlertDialog.Builder(this@MovieDetailsActivity)
+
+                builder.setTitle("Network issue")
+                builder.setMessage("Your network is turned off. Please turn on to load details of this movie...")
+                builder.setPositiveButton("OK", { dialogInterface: DialogInterface, i: Int -> finish() })
+                builder.show()
             }
 
         })
@@ -164,8 +176,8 @@ class MovieDetailsActivity : AppCompatActivity(), VideoAdapter.myOnClickListener
     }
 
     override fun onClick(position: Int) {
-//        val intent = Intent(this, MovieDetailsActivity::class.java)
-//        intent.putExtra("id", moviesData[position].id.toString())
-//        startActivity(intent)
+        val video = "https://youtube.com/watch?v=" + videoList[position].key
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(video))
+        startActivity(intent)
     }
 }

@@ -47,7 +47,13 @@ class MoviesActivity: AppCompatActivity(), MovieAdapter.myOnClickListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                 if(position == 0) category = "top_rated"
                 else if(position == 1) category = "popular"
-                if(position == 0 || position == 1) getMovies()
+
+                if(position == 0 || position == 1) {
+                    spin_kit.visibility = View.VISIBLE
+                    movies_recycler.visibility = View.GONE
+                    getMovies()
+                }
+
                 else {
                     category = "favorite"
                     getFavoriteMovies()
@@ -103,7 +109,6 @@ class MoviesActivity: AppCompatActivity(), MovieAdapter.myOnClickListener {
             }
 
             override fun onFailure(call: Call<results>, t: Throwable) {
-                Toast.makeText(this@MoviesActivity, t.message, Toast.LENGTH_LONG).show()
                 val builder = AlertDialog.Builder(this@MoviesActivity)
 
                 builder.setTitle("Network issue")
